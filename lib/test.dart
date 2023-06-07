@@ -41,7 +41,13 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
   var operator = "";
   var input_1 = "";
-
+  // LinearGradient(
+  // colors: [color1, color2],
+  // // colors: [Color(0xFF3fd89f), Color(0xFF3eb9b4)],
+  // begin: FractionalOffset(0.0, 0.0),
+  // end: FractionalOffset(1.0, 1.0),
+  // stops: [0.3, 1.0],
+  // tileMode: TileMode.clamp)
   void button_clicked(button_text) {
     if (["+", "-", "X", "%"].contains(button_text)) {
       operator = button_text;
@@ -80,48 +86,53 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
                 controller: inputController,
+                readOnly: true,
                 decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.cyan, width: 2),),
-                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.cyan, width: 2),),
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.cyan, width: 2,),),
+                  border: OutlineInputBorder(borderSide: BorderSide(color: Colors.cyan, width: 2,),),
+                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.cyan, width: 2,),),
                 ),
+                style: const TextStyle(fontSize: 20),
               ),
               SizedBox(
                   height: device_height * 0.6,
                   child: GridView.count(
                     crossAxisCount: 4,
-                    crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
+                    crossAxisSpacing: 4,
                     childAspectRatio: 1.8,
                     children: List.generate(button_text_list.length, (index) {
                       return Container(
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
-                            colors: [Colors.cyan, Colors.greenAccent],
-                            begin: FractionalOffset(0.4, 0.0),
-                            end: FractionalOffset(1.0, 1.5),
-                            stops: [0.0, 0.8],
-                            tileMode: TileMode.clamp
+                              colors: [Colors.cyan, Colors.greenAccent],
+                              begin: FractionalOffset(0.4, 0.0),
+                              end: FractionalOffset(1.0, 1.5),
+                              stops: [0.0, 0.8],
+                              tileMode: TileMode.clamp
                           ),
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.circular(15)
+                          borderRadius: BorderRadius.circular(20),
                         ),
                         child: ElevatedButton(
-                          child: Text(button_text_list[index]),
                           onPressed: () {
                             button_clicked(button_text_list[index]);
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.transparent,
                             shadowColor: Colors.transparent,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                           ),
-                        )
+                          child: Text(
+                            button_text_list[index],
+                            style: const TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.w400),
+                          ),
+                        ),
                       );
                     }),
                   )
